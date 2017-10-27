@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = 'spspub_log'
-  s.version = '0.1.0'
+  s.version = '0.1.1'
   s.summary = 'Publishes log messages instead of logging ' + 
       'them to file. #debug #debugging #trace'
   s.authors = ['James Robertson']

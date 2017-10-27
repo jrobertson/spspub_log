@@ -7,9 +7,10 @@ require 'sps-pub'
 
 class SPSPubLog < SPSPub
   
-  def initialize(host: 'sps', address: host, port: '59000', topic: 'log')
+  def initialize(host: 'sps', address: host, port: '59000', topic: 'log', 
+                 charlimit: 140)
     super(host: host, address: host, port: port)
-    @topic = topic
+    @topic, @charlimit = topic, charlimit
     sleep 0.05
   end
 
@@ -24,8 +25,11 @@ class SPSPubLog < SPSPub
   private
 
   def pub_msg(s, label=:debug)
-    msg, topic = s.split(/ *: */,2).reverse
+    
+    fullmsg, topic = s.split(/ *: */,2).reverse
+    msg = fullmsg.length <= @charlimit ? fullmsg : fullmsg[0..@charlimit - 3] + '...'
     fqm = [@topic, topic, label.to_s].compact.join('/') + ': ' + msg
+    
     notice(fqm)
   end
 
