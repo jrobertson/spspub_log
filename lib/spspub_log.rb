@@ -28,7 +28,7 @@ class SPSPubLog < SPSPub
     
     fullmsg, topic = s.split(/ *: */,2).reverse
     msg = fullmsg.length <= @charlimit ? fullmsg : fullmsg[0..@charlimit - 3] + '...'
-    fqm = [@topic, topic, label.to_s].compact.join('/') + ': ' + msg
+    fqm = [@topic, label.to_s, topic].compact.join('/') + ': ' + msg
     
     notice(fqm)
   end
